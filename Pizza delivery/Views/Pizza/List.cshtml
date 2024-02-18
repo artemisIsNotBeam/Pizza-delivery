@@ -1,0 +1,18 @@
+﻿@model PizzasListViewModel
+@using Pizza_delivery.ViewModels
+
+@{
+    ViewData["Title"] = "Pizzas yum";
+}
+
+<div class="text-center">
+    <h1 class="card display-4">@Model.CurrentCategory</h1>
+    <div class="PizzaList row">
+    @foreach (var pizza in Model.Pizzas)
+    {
+        <partial name="_PizzaCard" model="pizza" />
+    }
+     
+    </div>
+</div>
+
