@@ -22,7 +22,7 @@ namespace Pizza_delivery.Controllers
             return View(pizzaListViewModel);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Detail(int id)
         {
             var pizza = _pizzaRepository.GetPizzaById(id);
             if (pizza == null)
