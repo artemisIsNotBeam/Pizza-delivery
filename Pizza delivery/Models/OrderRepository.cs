@@ -1,4 +1,5 @@
-﻿namespace Pizza_delivery.Models
+﻿
+namespace Pizza_delivery.Models
 {
 	public class OrderRepository : IOrderRepository
 	{
@@ -10,6 +11,23 @@
 			_shoppingCart = shoppingCart;
 		}
 
-		public void CreateOrder(Order order);
+		public void CreateOrder(Order order) {
+            order.OrderPlaced = DateTime.Now;
+			var shoppingCartItems = _shoppingCart.ShoppingCartItems;
+			order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
+			order.OrderDetails = new List<OrderDetail>();
+			foreach (var item in shoppingCartItems)
+			{
+				var orderDetail = new OrderDetail
+				{
+					Amount = item.Quantity,
+					PizzaId = item.Pizza.PizzaId,
+					Price = item.Pizza.Price,
+				};
+				order.OrderDetails.Add(orderDetail);
+			}
+			_db.Orders.Add(order);
+			_db.SaveChanges();
+        }
 	}
 }

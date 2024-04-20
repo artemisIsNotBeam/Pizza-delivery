@@ -1,10 +1,8 @@
 ﻿namespace Pizza_delivery.Models
 {
-	public class IOrderRepository
+	public interface IOrderRepository
 	{
-		public void CreateOrder(Order order)
-		{
-
-		}
+		public void CreateOrder(Order order);
+		
 	}
 }
