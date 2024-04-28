@@ -8,7 +8,7 @@ namespace Pizza_delivery.Models
 	{
 		[Key]
 		public int OrderId { get; set; }
-		public List<OrderDetail> OrderDetails { get; set; }
+		public List<OrderDetail>? OrderDetails { get; set; }
 
 		[Required(ErrorMessage = "Please enter your first name")]
 		[Display(Name = "First name")]
@@ -24,7 +24,7 @@ namespace Pizza_delivery.Models
 		[StringLength(50)]
 		public string StreetAddress { get; set; }
 		[Display(Name = "Address 2")]
-		public string StreetAddress2 { get; set; }
+		public string? StreetAddress2 { get; set; }
 		[Required(ErrorMessage = "Please enter your City")]
 		[StringLength(50)]
 		public string City { get; set; }
@@ -44,8 +44,8 @@ namespace Pizza_delivery.Models
 		[DataType(DataType.EmailAddress)]
 		[StringLength(25)]
 		public string Email { get; set; }
-		public double OrderTotal { get; set; }
-		public DateTime OrderPlaced { get; set; }
+		public double? OrderTotal { get; set; }
+		public DateTime? OrderPlaced { get; set; }
 
 	}
 }
