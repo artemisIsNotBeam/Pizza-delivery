@@ -1,11 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using Pizza_delivery.Models;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+//var connectionString = builder.Configuration.GetConnectionString("IdentifyDbContextConnection") ?? throw new InvalidOperationException("Connection string 'IdentifyDbContextConnection' not found.");
 
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source = pizzas.db"));
 
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<IdentifyDbContext>();
+builder.Services.AddDbContext<IdentifyDbContext>(options => options.UseSqlite("Data Source = users.db"));
+
+builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IPizzaRepository, PizzaRepository>();
@@ -29,10 +35,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
 
 app.Run();
