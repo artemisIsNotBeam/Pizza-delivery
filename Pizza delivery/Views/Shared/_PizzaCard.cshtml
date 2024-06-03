@@ -3,7 +3,7 @@
     
 }
 
-<div class="col-sm-4 col-lg-4 col-md-4">
+<div class="col-sm-4 col-lg-4 col-md-4 mb-4">
     <div class="card">
         <div class="pizzathumbnails">
             <img class ="card-img-top" src="@Model.ImgThumbnailUrl" alt="">
@@ -15,6 +15,11 @@
                    asp-action="Detail"
                    asp-route-id="@Model.PizzaId">@Model.Name</a>
             </h3>
+            <p class="button">
+                <a class="btn btn-danger" asp-controller="ShoppingCart"
+                   asp-action="AddToShoppingCart"
+                   asp-route-pizzaId="@Model.PizzaId">Add to cart</a>
+            </p>
             <p class="card-text">@Model.Shortdesc</p>
         </div>
     </div>
